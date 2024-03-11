@@ -11,4 +11,4 @@ sample:
 echo "Hello world"
 echo Line1
 echo Line2
-echo welcome to Bash scripting
+echo welcome to Bash scripting for learning
