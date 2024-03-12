@@ -1,4 +1,4 @@
-#!\bin\bash
+#!/bin/bash
 
 echo -e "Demo of If else, else if condition usage"
 
