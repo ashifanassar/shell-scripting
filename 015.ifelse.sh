@@ -4,18 +4,23 @@ echo -e "Demo on if, if else, else if conditions Usage"
 
 ACTION=$1
 
-if [ "$ACTION" = "start" ] ; then 
-    echo -e "\e[32m Starting Dispatch Service \e[0m"
-    exit 0 
+if [ "$ACTION" = "start" ] ; then
 
-elif [ "$ACTION" = "stop" ] ; then 
-    echo -e "\e[31m Stopping Dispatch Service \e[0m" 
+    echo "start the service"
+    exit 0
+
+elif [ "$ACTION" = "stop"] ; then
+ 
+    echo "Stop the service"
     exit 1
 
-elif [ "$ACTION" = "restart" ] ; then 
-    echo -e "\e[34m Restarting Dispatch Service \e[0m" 
+elif [ "$ACTION" = "restart" ] ; then
+
+    echo "Restart the service"
     exit 2
-else 
-    echo -e "\e[35m Valid options are start stop restart only \e[0m"
+
+else
+    echo "None of the option"
     exit 3
+
 fi
