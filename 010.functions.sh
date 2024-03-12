@@ -11,7 +11,7 @@
 
 f()
 {
-    echo "This is function
+    echo "This is function"
 }
 
 # How to call the funtion
@@ -32,6 +32,17 @@ sample()
 
 sample
 
+stat() {
+    echo "Number of opened sessions $(who|wc -l)"
+    echo "Todays date is $(date +%F)"
+    echo "Load Average in last 1 minute : $(uptime | awk -F : '{print $NF}' | awk -F ',' '{print $1}')" 
+}
+
+stat
+sleep 3
+stat 
+sleep 3
+stat 
 
 
 
