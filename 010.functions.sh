@@ -35,12 +35,10 @@ sample
 stat()
 {
     echo "Todays date is $(date +%F)"
-    echo "The uptime of the system : $(uptime | awk -F : '{print $NF}' | awk -F  ',' '{print $1}')"
+    echo  -e "The uptime of the system : $(uptime | awk -F : '{print $NF}' | awk -F  ',' '{print $1}')"
 
 }
 stat
-sleep 3
-stat
-sleep 3
-stat
+
+
 
