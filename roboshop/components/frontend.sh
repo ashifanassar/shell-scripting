@@ -22,7 +22,7 @@ echo -n "Installing the Nginx on the server"
 yum install nginx -y  &>> $LOGFILE
 stat $?
 
-echo -n"Enabling the service"
+echo -n "Enabling the service"
 systemctl enable nginx &>> LOGFILE
 stat $?
 
