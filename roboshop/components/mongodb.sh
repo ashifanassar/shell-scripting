@@ -19,18 +19,18 @@ else
     fi
 }
 
-echo "Setup the Mongodb"
+echo "Setup the $COMPONENT"
 curl -s -0 /etc/yum.repos.d/mongodb.repo $MONGO_REPO
 stat $?
 
-echo "Install the Mongodb"
-dnf install -y mongodb-org &>> $LOGFILE
+echo "Install the $COMPONENT"
+dnf install -y $COMPONENT-org &>> $LOGFILE
 stat $?
 
-echo "Enable the Mongodb"
+echo "Enable the $COMPONENT"
 systemctl enable mongod &>> $LOGFILE
 stat $?
 
-echo "Start the Mongodb"
+echo "Start the $COMPONENT"
 systemctl start mongod &>> $LOGFILE
 stat $?
