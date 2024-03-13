@@ -24,7 +24,7 @@ curl -s -0 /etc/yum.repos.d/mongodb.repo $MONGO_REPO
 stat $?
 
 echo "Install the $COMPONENT"
-dnf install -y $COMPONENT-org &>> $LOGFILE
+yum install -y $COMPONENT-org &>> $LOGFILE
 stat $?
 
 echo "Enable the $COMPONENT"
