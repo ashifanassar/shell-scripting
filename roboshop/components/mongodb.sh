@@ -9,7 +9,7 @@ fi
 
 COMPONENT="mongodb"
 LOGFILE="/tmp/$1.log"
-MONGO_REPO="https://raw.githubusercontent.com/stans-robot-project/mongodb/main/mongo.repo"
+
 
 stat(){
     if [ $1 -eq 0 ]; then
@@ -20,7 +20,7 @@ else
 }
 
 echo "Setup the $COMPONENT"
-curl -s -0 /etc/yum.repos.d/mongodb.repo $MONGO_REPO
+curl -s -0 /etc/yum.repos.d/mongodb.repo https://raw.githubusercontent.com/stans-robot-project/mongodb/main/mongo.repo
 stat $?
 
 echo "Install the $COMPONENT"
