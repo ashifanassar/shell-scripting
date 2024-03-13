@@ -1,3 +1,3 @@
 #!/bin/bash
 
-echo "welcome to roboshop"
+bash components/$1.sh
