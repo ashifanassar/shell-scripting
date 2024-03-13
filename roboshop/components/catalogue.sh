@@ -20,15 +20,15 @@ else
 }
 
 echo -n "Disable Nodejs default modules"
-dnf module disable nodejs -y
+dnf module disable nodejs -y &>>$LOGFILE
 stat $?
 
 echo -n "Enable Nodejs18"
-dnf module enable nodejs:18 -y
+dnf module enable nodejs:18 -y &>>$LOGFILE
 stat $?
 
 echo -n "Install Nodejs 18"
-dnf install nodejs -y
+dnf install nodejs -y &>>$LOGFILE
 stat $?
 
 echo -n "creating the new user $APPUSER"
