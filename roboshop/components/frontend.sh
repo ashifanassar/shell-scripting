@@ -6,7 +6,8 @@ if [ $ID -ne 0 ]; then
     echo -e "\e[33m Not the root user use the Sudo access \e[0m"
     exit 1
 fi
-$COMPONENT="frontend"
+
+COMPONENT="frontend"
 LOGFILE="/tmp/frontend.log"
 
 stat(){
