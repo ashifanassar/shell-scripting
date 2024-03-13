@@ -50,9 +50,10 @@ mv ${COMPONENT}-main/* . &>> LOGFILE
 mv static/* . &>> LOGFILE
 rm -rf f${COMPONENT}-master README.md &>> LOGFILE
 mv localhost.conf /etc/nginx/default.d/roboshop.conf
+stat $?
 
 echo -n "Restarting the service"
 systemctl restart nginx 
-
+stat $?
 
 
