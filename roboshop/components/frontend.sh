@@ -20,15 +20,15 @@ else
 
 
 echo -n "Installing the Nginx on the server"
-yum install nginx -y  &>> LOGFILE
+yum install nginx -y  &>> $LOGFILE
 stat $?
 
 echo -n "Enabling the service"
-systemctl enable nginx &>> LOGFILE
+systemctl enable nginx &>> $LOGFILE
 stat $?
 
 echo -n "starting the service"
-systemctl start nginx &>> LOGFILE
+systemctl start nginx &>> $LOGFILE
 stat $?
 
 
@@ -42,13 +42,13 @@ rm -rf * &>> LOGFILE
 stat $?
 
 echo -n "Extrating $COMPONENT "
-unzip /tmp/frontend.zip &>> LOGFILE
+unzip /tmp/frontend.zip &>> $LOGFILE
 stat $?
 
 echo -n "configuring $COMPONENT "
-mv ${COMPONENT}-main/* . &>> LOGFILE
-mv static/* . &>> LOGFILE
-rm -rf f${COMPONENT}-master README.md &>> LOGFILE
+mv ${COMPONENT}-main/* . &>> $LOGFILE
+mv static/* . &>> $LOGFILE
+rm -rf f${COMPONENT}-master README.md &>> $LOGFILE
 mv localhost.conf /etc/nginx/default.d/roboshop.conf
 stat $?
 
