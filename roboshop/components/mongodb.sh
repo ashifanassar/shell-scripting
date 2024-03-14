@@ -8,8 +8,9 @@ if [ $ID -ne 0 ]; then
 fi
 
 COMPONENT="mongodb"
-LOGFILE="/tmp/$1.log"
-componenturl="https://github.com/stans-robot-project/mongodb/archive/main.zip"
+LOGFILE="/tmp/${COMPONENT}.log"
+MONGO_REPO="https://raw.githubusercontent.com/stans-robot-project/${COMPONENT}/main/mongo.repo"
+SCHEMA_URL="https://github.com/stans-robot-project/mongodb/archive/main.zip"
 
 stat(){
     if [ $1 -eq 0 ]; then
@@ -19,13 +20,13 @@ else
     fi
 }
 
-echo -n "Setup the $COMPONENT"
-curl -s -0 /etc/yum.repos.d/mongodb.repo https://raw.githubusercontent.com/stans-robot-project/mongodb/main/mongo.repo
-stat $?
+echo -n "Configuring $COMPONENT repo"
+curl -s -o /etc/yum.repos.d/mongodb.repo $MONGO_REPO
+stat $? 
 
-echo -n "Install the $COMPONENT"
-dnf install -y $COMPONENT-org &>> $LOGFILE
-stat $?
+echo -n "Installing $COMPONENT :"
+dnf install -y mongodb-org  &>>  $LOGFILE
+stat $? 
 
 echo -n "Enable the $COMPONENT"
 systemctl enable mongod &>> $LOGFILE
