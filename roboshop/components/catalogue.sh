@@ -34,7 +34,7 @@ stat $?
 echo -n "creating the new user $APPUSER"
 id $APPUSER
 if [ $? -ne 0 ]; then
-    useradd r$APPUSER
+    useradd $APPUSER
     stat $?
 else
     echo -e "\e[31m skipping \e[0m"
@@ -43,6 +43,7 @@ stat $?
 
 
 echo -n "Downloading the component"
+sudo su roboshop
 curl -s -L -o /tmp/catalogue.zip "https://github.com/stans-robot-project/$COMPONENT/archive/main.zip"
 stat $?
 
