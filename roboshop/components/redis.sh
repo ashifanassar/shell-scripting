@@ -41,3 +41,7 @@ echo -n "Start the $COMPONENT"
 systemctl enable $COMPONENT &>> $LOGFILE
 systemctl restart $COMPONENT &>> $LOGFILE
 stat $?
+
+echo -n "Status of the $COMPONENT"
+systemctl status $COMPONENT -l
+stat $?

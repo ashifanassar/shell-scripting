@@ -7,7 +7,7 @@ if [ $ID -ne 0 ]; then
     exit 1
 fi
 
-COMPONENT="user"
+COMPONENT="cart"
 LOGFILE="/tmp/$COMPONENT.log"
 APPUSER="roboshop"
 APP_DIR="/home/roboshop/$COMPONENT"
@@ -44,7 +44,7 @@ stat $?
 
 
 echo -n "Downloading the component"
-curl -s -L -o /tmp/user.zip "https://github.com/stans-robot-project/$COMPONENT/archive/main.zip"
+curl -s -L -o /tmp/$COMPONENT.zip "https://github.com/stans-robot-project/$COMPONENT/archive/main.zip"
 stat $?
 
 echo -n "Performing $COMPONENT cleanup"
@@ -53,7 +53,7 @@ stat $?
 
 echo "Extracting the $COMPONENT"
 cd /home/roboshop
-unzip -o /tmp/user.zip &>>$LOGFILE
+unzip -o /tmp/$COMPONENT.zip &>>$LOGFILE
 stat $?
 
 echo -n "configuring the permissions"
@@ -67,7 +67,8 @@ npm install &>>$LOGFILE
 stat $?
 
 echo -n "Configuring the  $COMPONENT code"
-sed -i -e 's/MONGO_DNSNAME/mongodb.roboshopshopping/' -e 's/REDIS_ENDPOINT/redis.roboshopshopping/'${APP_DIR}/systemd.service
+sed -i -e 's/CATALOGUE_ENDPOINT/catalogue.roboshopshopping/' ${APP_DIR}/systemd.service
+sed -i -e 's/REDIS_ENDPOINT/redis.roboshopshopping/' ${APP_DIR}/systemd.service
 mv ${APP_DIR}/systemd.service /etc/systemd/system/$COMPONENT.service
 stat $?
 
@@ -75,3 +76,6 @@ echo -n "starting the c$COMPONENT"
 systemctl daemon-reload
 systemctl start $COMPONENT &>>$LOGFILE
 systemctl enable $COMPONENT &>>$LOGFILE
+
+echo -n "status of the $COMPONENT"
+systemctl start $COMPONENT

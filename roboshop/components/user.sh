@@ -76,3 +76,4 @@ echo -n "starting the c$COMPONENT"
 systemctl daemon-reload
 systemctl start $COMPONENT &>>$LOGFILE
 systemctl enable $COMPONENT &>>$LOGFILE
+
