@@ -44,8 +44,8 @@ echo -n "starting $COMPONENT service"
 systemctl restart mongod &>> $LOGFILE
 stat $?
 
-echo -n "Downloading the $COMPONENT schema"
-curl -s -L -o /tmp/$COMPONENT.zip $componenturl &>> $LOGFILE
+echo -n "Downloading $COMPONENT Schema File : "
+curl -s -L -o /tmp/mongodb.zip $SCHEMA_URL  &>>  $LOGFILE
 stat $?
 
 echo -n "Extracting the $COMPONENT file"
