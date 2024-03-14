@@ -43,7 +43,7 @@ stat $?
 
 
 echo -n "Downloading the component"
-sudo su roboshop
+#sudo su roboshop
 curl -s -L -o /tmp/catalogue.zip "https://github.com/stans-robot-project/$COMPONENT/archive/main.zip"
 stat $?
 
