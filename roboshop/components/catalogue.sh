@@ -41,3 +41,12 @@ else
 fi
 stat $?
 
+
+echo -n "Downloading the component"
+curl -s -L -o /tmp/catalogue.zip "https://github.com/stans-robot-project/$COMPONENT/archive/main.zip"
+stat $?
+
+echo "Extracting the $APPUSER"
+cd /home/roboshop
+unzip /tmp/catalogue.zip &>>$LOGFILE
+stat $?
