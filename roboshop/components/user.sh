@@ -67,7 +67,8 @@ npm install &>>$LOGFILE
 stat $?
 
 echo -n "Configuring the  $COMPONENT code"
-sed -i -e 's/MONGO_DNSNAME/mongodb.roboshopshopping/' -e 's/REDIS_ENDPOINT/redis.roboshopshopping/'${APP_DIR}/systemd.service
+sed -i -e 's/MONGO_DNSNAME/mongodb.roboshopshopping/' ${APP_DIR}/systemd.service
+sed -i -e 's/REDIS_ENDPOINT/redis.roboshopshopping/' ${APP_DIR}/systemd.service
 mv ${APP_DIR}/systemd.service /etc/systemd/system/$COMPONENT.service
 stat $?
 
