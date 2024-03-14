@@ -40,3 +40,4 @@ stat $?
 echo -n "Start the $COMPONENT"
 systemctl enable $COMPONENT &>> $LOGFILE
 systemctl restart $COMPONENT &>> $LOGFILE
+stat $?
