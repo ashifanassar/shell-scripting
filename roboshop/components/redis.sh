@@ -33,6 +33,7 @@ stat $?
 
 echo -e "Enabling the $COMPONENT visibility"
 sed -i -e 's/127.0.0.1/0.0.0.0/' /etc/redis.conf
+sed -i -e 's/127.0.0.1/0.0.0.0/' /etc/redis/redis.conf
 stat $?
 
 echo -n "Start the $COMPONENT"
