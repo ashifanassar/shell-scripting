@@ -24,7 +24,7 @@ curl -s -0 /etc/yum.repos.d/mongodb.repo https://raw.githubusercontent.com/stans
 stat $?
 
 echo -n "Install the $COMPONENT"
-yum install -y $COMPONENT-org &>> $LOGFILE
+dnf install -y $COMPONENT-org &>> $LOGFILE
 stat $?
 
 echo -n "Enable the $COMPONENT"
