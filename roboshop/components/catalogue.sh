@@ -10,6 +10,7 @@ fi
 COMPONENT="catalogue"
 LOGFILE="/tmp/$COMPONENT.log"
 APPUSER="roboshop"
+APP_DIR="/home/roboshop/$COMPONENT"
 
 stat(){
     if [ $1 -eq 0 ]; then
@@ -47,7 +48,31 @@ echo -n "Downloading the component"
 curl -s -L -o /tmp/catalogue.zip "https://github.com/stans-robot-project/$COMPONENT/archive/main.zip"
 stat $?
 
-echo "Extracting the $APPUSER"
-cd /home/roboshop
-unzip /tmp/catalogue.zip 
+echo -n "Performing $COMPONENT cleanup"
+rm -rf ${APP_DIR} &>>$LOGFILE
 stat $?
+
+echo "Extracting the $COMPONENT"
+cd /home/roboshop
+unzip -o /tmp/catalogue.zip &>>$LOGFILE
+stat $?
+
+echo -n "configuring the permissions"
+mv /home/roboshop/$COMPONENT-main ${APP_DIR}
+chown ${APPUSER}:${APPUSER} ${APP_DIR}
+stat $?
+
+echo -n "Generating the $COMPONENT artifacts"
+cd ${APP_DIR}
+npm install &>>$LOGFILE
+stat $?
+
+echo -n "Configuring the  $COMPONENT code"
+sed -e 's/MONGO_DNSNAME/mongodb.roboshopshopping/' ${APP_DIR}/systemd.service
+mv ${APP_DIR}/systemd.service /etc/systemd/system/$COMPONENT.service
+stat $?
+
+echo -n "starting the c$COMPONENT"
+systemctl daemon-reload
+systemctl start $COMPONENT &>>$LOGFILE
+systemctl enable $COMPONENT &>>$LOGFILE
