@@ -57,6 +57,7 @@ echo -n "Updating the proxy"
 
     for i in catalogue user ; do
 sed -i -e "/$i/s/localhost/mongodb.roboshopshopping/" /etc/nginx/default.d/roboshop.conf
+    done
 stat $?
 
 
