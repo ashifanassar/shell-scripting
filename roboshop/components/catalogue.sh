@@ -49,5 +49,5 @@ stat $?
 
 echo "Extracting the $APPUSER"
 cd /home/roboshop
-unzip /tmp/catalogue.zip &>>$LOGFILE
+unzip /tmp/catalogue.zip 
 stat $?
