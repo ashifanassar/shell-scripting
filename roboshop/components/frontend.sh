@@ -52,6 +52,12 @@ rm -rf f${COMPONENT}-master README.md &>> $LOGFILE
 mv localhost.conf /etc/nginx/default.d/roboshop.conf
 stat $?
 
+
+echo -n "Updating the proxy"
+sed -e "/catalogue/s/localhost/mongodb.roboshopshopping/" /etc/nginx/default.d/roboshop.conf
+stat $?
+
+
 echo -n "Restarting the service"
 systemctl restart nginx 
 stat $?
