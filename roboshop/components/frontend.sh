@@ -54,7 +54,9 @@ stat $?
 
 
 echo -n "Updating the proxy"
-sed -e "/catalogue/s/localhost/mongodb.roboshopshopping/" /etc/nginx/default.d/roboshop.conf
+
+    for i in catalogue user ; do
+sed -i -e "/$i/s/localhost/mongodb.roboshopshopping/" /etc/nginx/default.d/roboshop.conf
 stat $?
 
 
