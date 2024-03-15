@@ -62,7 +62,7 @@ CONFIG_SVC() {
     stat $? 
 
     echo -n "Configuring $COMPONENT Service: "
-    sed -i -e's/MONGO_ENDPOINT/mongodb.roboshopshopping/' -e 's/MONGO_DNSNAME/mongodb.roboshopshopping/' ${APP_DIR}/systemd.service
+    sed -i -e 's/DBHOST/mysql.roboshopshopping/' -e 's/CARTENDPOINT/cart.roboshopshopping/' -e 's/CATALOGUE_ENDPOINT/catalogue.roboshopshopping/' -e 's/MONGO_ENDPOINT/mongodb.roboshopshopping/' -e 's/REDIS_ENDPOINT/redis.roboshopshopping/' -e 's/MONGO_DNSNAME/mongodb.roboshopshopping/' ${APP_DIR}/systemd.service
     mv ${APP_DIR}/systemd.service   /etc/systemd/system/${COMPONENT}.service
     stat $? 
 }
@@ -94,7 +94,6 @@ Nodejs(){
     DOWNLOAD_EXTRACT
 
     CONFIG_SVC
-    
     echo -n "Generating $COMPONENT Artifacts :"
     cd ${APP_DIR}
     npm install  &>>  $LOGFILE
