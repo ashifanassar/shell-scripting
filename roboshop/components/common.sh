@@ -97,7 +97,7 @@ Nodejs(){
 
 
     echo -n "Generating $COMPONENT Artifacts :"
-    cd ${APPUSER_DIR}
+    cd ${APP_DIR}
     npm install  &>>  $LOGFILE
     stat $?
 
