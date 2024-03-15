@@ -55,7 +55,7 @@ CONFIG_SVC() {
     stat $? 
 
     echo -n "Configuring $COMPONENT Service: "
-    sed -i -e 's/CARTENDPOINT/cart.roboshopshopping/' -e 's/CATALOGUE_ENDPOINT/catalogue.roboshopshopping/' -e 's/MONGO_ENDPOINT/mongodb.roboshopshopping/' -e 's/REDIS_ENDPOINT/redis.roboshopshopping/' -e 's/MONGO_DNSNAME/mongodb.roboshopshopping/' /home/roboshop/${COMPONENT}systemd.service
+    sed -i -e 's/CARTENDPOINT/cart.roboshopshopping/' -e 's/CATALOGUE_ENDPOINT/catalogue.roboshopshopping/' -e 's/MONGO_ENDPOINT/mongodb.roboshopshopping/' -e 's/REDIS_ENDPOINT/redis.roboshopshopping/' -e 's/MONGO_DNSNAME/mongodb.roboshopshopping/' /home/roboshop/${COMPONENT}/systemd.service
     mv /home/roboshop/${COMPONENT}/systemd.service   /etc/systemd/system/${COMPONENT}.service
     stat $? 
 }
