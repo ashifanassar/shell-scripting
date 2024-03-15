@@ -58,7 +58,7 @@ DOWNLOAD_EXTRACT() {
 CONFIG_SVC() {
     echo -n "Configuring Permissions :"
     mv /home/roboshop/${COMPONENT}-main ${APPUSER_DIR} &>>  $LOGFILE
-    chown -r ${APPUSER}:${APPUSER} ${APPUSER_DIR}      &>>  $LOGFILE
+    chown ${APPUSER}:${APPUSER} ${APPUSER_DIR}      &>>  $LOGFILE
     stat $? 
 
     echo -n "Configuring $COMPONENT Service: "
