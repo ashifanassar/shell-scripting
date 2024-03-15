@@ -93,13 +93,13 @@ Nodejs(){
 
     DOWNLOAD_EXTRACT
 
-    CONFIG_SVC
-
 
     echo -n "Generating $COMPONENT Artifacts :"
     cd ${APP_DIR}
     npm install  &>>  $LOGFILE
     stat $?
+
+    CONFIG_SVC
 
     START_SVC
 }
