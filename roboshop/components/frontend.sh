@@ -49,7 +49,7 @@ stat $?
 
 echo -n "Updating Reverse Proxy File: "
     for i in catalogue user cart ; do 
-        sed -i -e "/$i/s/localhost/$i.roboshop.internal/" /etc/nginx/default.d/roboshop.conf
+        sed -i -e "/$i/s/localhost/$i.roboshopshopping/" /etc/nginx/default.d/roboshop.conf
     done
 stat $?
 
