@@ -89,11 +89,11 @@ Nodejs(){
     dnf install nodejs -y &>>$LOGFILE
     stat $?
 
-    CREATE_USER()     #Calling another function
+    CREATE_USER    #Calling another function
 
-    DOWNLOAD_EXTRACT()
+    DOWNLOAD_EXTRACT
 
-    CONFIG_SVC()
+    CONFIG_SVC
 
 
     echo -n "Generating $COMPONENT Artifacts :"
