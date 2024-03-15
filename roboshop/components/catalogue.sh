@@ -12,5 +12,5 @@ Nodejs() #check in the common.sh file
 
 
 
-echo -n "status of the $COMPONENT"
+echo -e "status of the $COMPONENT"
 systemctl status $COMPONENT -l
