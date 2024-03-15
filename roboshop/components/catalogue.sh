@@ -8,4 +8,4 @@ source components/common.sh  #Source has all the funtions
 
 #Calling the Nodejs component
 
-Nodejs #check in the common.sh file
+NODEJS #check in the common.sh file
