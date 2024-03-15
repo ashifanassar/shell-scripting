@@ -5,7 +5,7 @@
 
 LOGFILE="/tmp/$COMPONENT.log"
 APPUSER="roboshop"
-APPUSER_DIR="/home/roboshop/${COMPONENT}"
+
 
 ID=$(id -u)
 if [ $ID -ne 0 ] ; then 
@@ -39,7 +39,7 @@ DOWNLOAD_AND_EXTRACT() {
     stat $? 
 
     echo -n "Performing $COMPONENT Cleanup :"
-    rm -rf ${APPUSER_DIR}  &>>  $LOGFILE
+    rm -rf /home/roboshop/${COMPONENT}  &>>  $LOGFILE
     stat $? 
 
     echo -n "Extracting $COMPONENT :"
@@ -50,13 +50,13 @@ DOWNLOAD_AND_EXTRACT() {
 
 CONFIG_SVC() {
     echo -n "Configuring Permissions :"
-    mv /home/roboshop/${COMPONENT}-main ${APPUSER_DIR} &>>  $LOGFILE
-    chown -r ${APPUSER}:${APPUSER} ${APPUSER_DIR}      &>>  $LOGFILE
+    mv /home/roboshop/${COMPONENT}-main /home/roboshop/${COMPONENT} &>>  $LOGFILE
+    chown -r ${APPUSER}:${APPUSER} /home/roboshop/${COMPONENT}     &>>  $LOGFILE
     stat $? 
 
     echo -n "Configuring $COMPONENT Service: "
-    sed -i -e 's/CARTENDPOINT/cart.roboshopshopping/' -e 's/CATALOGUE_ENDPOINT/catalogue.roboshopshopping/' -e 's/MONGO_ENDPOINT/mongodb.roboshopshopping/' -e 's/REDIS_ENDPOINT/redis.roboshopshopping/' -e 's/MONGO_DNSNAME/mongodb.roboshopshopping/' ${APPUSER_DIR}/systemd.service
-    mv ${APPUSER_DIR}/systemd.service   /etc/systemd/system/${COMPONENT}.service
+    sed -i -e 's/CARTENDPOINT/cart.roboshopshopping/' -e 's/CATALOGUE_ENDPOINT/catalogue.roboshopshopping/' -e 's/MONGO_ENDPOINT/mongodb.roboshopshopping/' -e 's/REDIS_ENDPOINT/redis.roboshopshopping/' -e 's/MONGO_DNSNAME/mongodb.roboshopshopping/' /home/roboshop/${COMPONENT}systemd.service
+    mv /home/roboshop/${COMPONENT}/systemd.service   /etc/systemd/system/${COMPONENT}.service
     stat $? 
 }
 
@@ -88,7 +88,7 @@ NODEJS() {
     CONFIG_SVC
 
     echo -n "Generating $COMPONENT Artifacts :"
-    cd ${APPUSER_DIR}
+    cd /home/roboshop/${COMPONENT}
     npm install  &>>  $LOGFILE
     stat $?
 
