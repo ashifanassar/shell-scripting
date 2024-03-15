@@ -94,27 +94,3 @@ NODEJS() {
 
     START_SVC
 }
-
-
-MAVEN() {
-    echo -n "Installing maven :"
-    dnf install maven -y   &>>  $LOGFILE
-    stat $? 
-    
-    CREATE_USER
-
-    DOWNLOAD_AND_EXTRACT
-     
-    echo -n "Generating Artifacts :" 
-    cd ${APPUSER_DIR}
-    mvn clean package &>>  $LOGFILE
-    ls -ltr ${APPUSER_DIR}
-    stat $?
-
-    echo "Configuring artifact :"
-    mv ${APPUSER_DIR}/target/${COMPONENT}-1.0.jar ${COMPONENT}.jar
-    stat $? 
-
-    CONFIG_SVC
-
-}
