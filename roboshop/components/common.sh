@@ -62,7 +62,7 @@ CONFIG_SVC() {
     stat $? 
 
     echo -n "Configuring $COMPONENT Service: "
-    sed -i -e 's/DBHOST/mysql.roboshopshopping/' -e 's/CARTENDPOINT/cart.roboshopshopping/' -e 's/CATALOGUE_ENDPOINT/catalogue.roboshopshopping' -e 's/MONGO_ENDPOINT/mongodb.roboshopshopping/' -e 's/REDIS_ENDPOINT/redis.roboshopshopping/' -e 's/MONGO_DNSNAME/mongodb.roboshopshopping/' ${APPUSER_DIR}/systemd.service
+    sed -i -e 's/CATALOGUE_ENDPOINT/catalogue.roboshopshopping' -e 's/MONGO_ENDPOINT/mongodb.roboshopshopping/' -e 's/MONGO_DNSNAME/mongodb.roboshopshopping/' ${APPUSER_DIR}/systemd.service
     mv ${APPUSER_DIR}/systemd.service   /etc/systemd/system/${COMPONENT}.service
     stat $? 
 }
