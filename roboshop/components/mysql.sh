@@ -11,7 +11,7 @@ dnf module disable mysql -y  &>>  $LOGFILE
 stat $? 
 
 echo -n "Configuring ${COMPONENT} repo :"
-curl -s -L -o /etc/yum.repos.d/mysql.repo $MYSQL_REPO
+curl -s -L -o /etc/yum.repos.d/mysql.repo https://raw.githubusercontent.com/stans-robot-project/mysql/main/mysql.repo
 stat $?
 
 
@@ -52,7 +52,7 @@ cd /tmp
 unzip -o /tmp/$COMPONENT   &>> $LOGFILE
 stat $?
 
-echo -n "Injecting the $COMPONENT schema"
-cd ${$COMPONENT}-main
-mysql -u root -p${mysql_root_password} <shipping.sql     &>>  ${LOGFILE}
+echo -n "Injecting the schema "
+cd ${COMPONENT}-main 
+mysql -u root -p${mysql_root_password} <shipping.sql     &>>  ${LOGFILE} 
 stat $?
