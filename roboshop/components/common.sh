@@ -94,3 +94,5 @@ NODEJS() {
 
     START_SVC
 }
+
+echo -n "Completing the common"
