@@ -26,13 +26,34 @@ systemctl enable mysqld   &>>  ${LOGFILE}
 systemctl start mysqld    &>>  ${LOGFILE}
 stat $?
 
+echo -n "Extracting the default sql password"
+export DEFAULT_ROOT_PASSWORD=$(grep "temporary password' /var/log/mysqld.log |awk -F " " $'{print $NF}')
+stat $?
 
-# echo -n "Enabling $COMPONENT visibility"
-# sed -i -e 's/127.0.0.1/0.0.0.0/' /etc/mongod.conf
-# stat $?
+#Password should be taken for the first tme when tries to take for the next time it fails inorder to avaoid it do the following
+if [ $? -ne 0 ]; then 
+    echo -n "Performing default password reset of root account:"
+    echo "ALTER USER 'root'@'localhost' IDENTIFIED BY 'RoboShop@1'" | mysql  --connect-expired-password -uroot -p$DEFAULT_ROOT_PASSWORD &>>  ${LOGFILE}
+    stat $?
+fi 
 
-# echo -n "Injecting the  $COMPONENT schema"
-# cd /tmp/mongodb-main 
-# mongo < catalogue.js &>> $LOGFILE
-# mongo < users.js &>> $LOGFILE
-# stat $?
+echo "show plugins;" | mysql -uroot -p${mysql_root_password} | grep validate_password  &>>  ${LOGFILE}
+if [ $? -eq 0 ]; then 
+    echo -n "Uninstalling Password-validate plugin :"
+    echo "uninstall plugin validate_password" | mysql -uroot -p${mysql_root_password} &>>  ${LOGFILE}
+    stat $?
+fi 
+
+echo -n "Downloading the $COMPONENT schema:"
+curl -s -L -o /tmp/${COMPONENT}.zip "https://github.com/stans-robot-project/${COMPONENT}/archive/main.zip"
+stat $? 
+
+echo -n "Extracting the $COMPONENT"
+cd /tmp
+unzip -o /tmp/$COMPONENT   &>> $LOGFILE
+stat $?
+
+echo -n "Injecting the $COMPONENT schema"
+cd ${$COMPONENT}-main
+mysql -u root -p${mysql_root_password} <shipping.sql     &>>  ${LOGFILE}
+stat $?
