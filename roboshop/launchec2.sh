@@ -21,5 +21,5 @@ echo "$1 Server Created and here is the IP ADDRESS $PRIVATE_IP"
 echo "Creating r53 json file with component name and ip address:"
 sed -e "s/IPADDRESS/${PRIVATE_IP}/g" -e "s/COMPONENT/${COMPONENT}/g" route53.json > /tmp/dns.json
 
-echo "Creating r53 json file with component name and ip address:"
+echo "Creating DNS Record for $COMPONENT :"
 aws route53 change-resource-record-sets --hosted-zone-id ${HOSTED_ZONE} --change-batch file:///tmp/dns.json 

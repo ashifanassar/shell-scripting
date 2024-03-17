@@ -50,7 +50,7 @@ DOWNLOAD_AND_EXTRACT() {
 
 CONFIG_SVC() {
     echo -n "Configuring Permissions :"
-    chown -R ${APPUSER}:${APPUSER} ${APPUSER_DIR}      &>>  $LOGFILE
+    chown ${APPUSER}:${APPUSER} ${APPUSER_DIR}      &>>  $LOGFILE
     stat $? 
 
     echo -n "Configuring $COMPONENT Service: "
