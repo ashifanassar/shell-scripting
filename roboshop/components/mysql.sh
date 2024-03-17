@@ -5,8 +5,6 @@ source components/common.sh  #Source has all the funtions
 
 COMPONENT="mysql"
 LOGFILE="/tmp/${COMPONENT}.log"
-MYSQL_REPO="https://raw.githubusercontent.com/stans-robot-project/${COMPONENT}/main/mysql.repo"
-SCHEMA_URL="https://raw.githubusercontent.com/stans-robot-project/${COMPONENT}/main/shipping.repo"
 mysql_root_password="RoboShop@1"
 echo -n "Disabling the $COMPONENT repo"
 dnf module disable mysql -y  &>>  $LOGFILE
@@ -30,11 +28,13 @@ echo -n "Extracting the default sql root password"
 export DEFAULT_ROOT_PASSWORD=$(grep 'temporary password' /var/log/mysqld.log |awk -F " " $'{print $NF}')
 stat $?
 
-#Password should be taken for the first tme when tries to take for the next time it fails inorder to avaoid it do the following
 
+
+#Password should be taken for the first tme when tries to take for the next time it fails inorder to avaoid it do the following
+echo "show databases;" | mysql -uroot -p${mysql_root_password} &>>  ${LOGFILE}
 if [ $? -ne 0 ]; then 
     echo -n "Performing default password reset of root account:"
-    echo "ALTER USER 'root'@'localhost' IDENTIFIED BY 'RoboShop@1'" | mysql --connect-expired-password -uroot -p$DEFAULT_ROOT_PASSWORD &>>  ${LOGFILE}
+    echo "ALTER USER 'root'@'localhost' IDENTIFIED BY 'RoboShop@1'" | mysql  --connect-expired-password -uroot -p$DEFAULT_ROOT_PASSWORD &>>  ${LOGFILE}
     stat $?
 fi 
 
