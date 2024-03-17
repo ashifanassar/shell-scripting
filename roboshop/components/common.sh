@@ -131,7 +131,7 @@ PYTHON(){
     DOWNLOAD_AND_EXTRACT
 
     echo -n "Generating Artifacts :"
-    cd /home/${APPUSER}/${COMPONENT}/
+    cd /home/${APPUSER}/${COMPONENT}/ &>>  $LOGFILE
     pip3.6 install -r requirements.txt
     stat $?
 
