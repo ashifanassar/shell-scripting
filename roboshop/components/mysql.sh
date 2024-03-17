@@ -24,8 +24,8 @@ systemctl enable mysqld   &>>  ${LOGFILE}
 systemctl start mysqld    &>>  ${LOGFILE}
 stat $?
 
-echo -n "Extracting the default sql password"
-export DEFAULT_ROOT_PASSWORD=$(grep "temporary password' /var/log/mysqld.log |awk -F " " $'{print $NF}')
+echo -n "Extracting the default sql root password"
+export DEFAULT_ROOT_PASSWORD=$(grep 'temporary password' /var/log/mysqld.log |awk -F " " $'{print $NF}')
 stat $?
 
 #Password should be taken for the first tme when tries to take for the next time it fails inorder to avaoid it do the following
