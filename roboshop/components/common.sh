@@ -106,7 +106,7 @@ MAVEN() {
 
     DOWNLOAD_AND_EXTRACT
 
-    CONFIG_SVC
+   
      
     echo -n "Generating Artifacts :"
     cd /home/${APPUSER}/${COMPONENT}/
@@ -116,6 +116,7 @@ MAVEN() {
     mv target/${COMPONENT}-1.0.jar ${COMPONENT}.jar
     stat $?
 
+    CONFIG_SVC
     
 }
 
