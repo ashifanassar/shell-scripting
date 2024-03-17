@@ -5,7 +5,7 @@
 
 LOGFILE="/tmp/$COMPONENT.log"
 APPUSER="roboshop"
-
+APPUSER_DIR="/home/${APPUSER}/${COMPONENT}"
 
 ID=$(id -u)
 if [ $ID -ne 0 ] ; then 
@@ -109,10 +109,10 @@ MAVEN() {
     echo -n "Generating Artifacts :"
     cd /home/${APPUSER}/${COMPONENT}/
     mvn clean package  &>> $LOGFILE
+    stat $?
+    echo -n "configuring the artifacts"
     mv target/${COMPONENT}-1.0.jar ${COMPONENT}.jar
     stat $?
 
     CONFIG_SVC
-
-    START_SVC
 }

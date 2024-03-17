@@ -1,6 +1,7 @@
 #!/bin/bash
 
 COMPONENT="shipping"
+
 source components/common.sh         
 echo -e "\e[35m Configuring ${COMPONENT} ......! \e[0m \n"
 # CALLING NODEJS FUNCTION
