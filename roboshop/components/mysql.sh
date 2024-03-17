@@ -5,7 +5,9 @@ source components/common.sh  #Source has all the funtions
 
 COMPONENT="mysql"
 LOGFILE="/tmp/${COMPONENT}.log"
-
+MYSQL_REPO="https://raw.githubusercontent.com/stans-robot-project/${COMPONENT}/main/mysql.repo"
+SCHEMA_URL="https://raw.githubusercontent.com/stans-robot-project/${COMPONENT}/main/shipping.repo"
+mysql_root_password="RoboShop@1"
 echo -n "Disabling the $COMPONENT repo"
 dnf module disable mysql -y  &>>  $LOGFILE
 stat $? 
@@ -38,13 +40,15 @@ fi
 
 echo "show plugins;" | mysql -uroot -p${mysql_root_password} | grep validate_password  &>>  ${LOGFILE}
 if [ $? -eq 0 ]; then 
-    echo -n "Uninstalling Password-validate plugin :"
+    echo -n "Uninstalling Password-validate plugin :" | mysql -uproot -p${mysql_root_password}
     echo "uninstall plugin validate_password" | mysql -uroot -p${mysql_root_password} &>>  ${LOGFILE}
     stat $?
 fi 
 
+
+
 echo -n "Downloading the $COMPONENT schema:"
-curl -s -L -o /tmp/${COMPONENT}.zip "https://github.com/stans-robot-project/${COMPONENT}/archive/main.zip"
+curl -s -L -o /tmp/${COMPONENT}.zip $SCHEMA_URL
 stat $? 
 
 echo -n "Extracting the $COMPONENT"
