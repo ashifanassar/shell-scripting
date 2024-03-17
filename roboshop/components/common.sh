@@ -44,7 +44,7 @@ DOWNLOAD_AND_EXTRACT() {
 
     echo -n "Extracting $COMPONENT :"
     cd /home/roboshop
-    unzip -o /tmp/${COMPONENT}.zip  &>>  $LOGFILE
+    unzip -o /tmp/${COMPONENT}.zip
     stat $? 
 }
 
