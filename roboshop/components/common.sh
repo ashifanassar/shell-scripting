@@ -116,3 +116,23 @@ MAVEN() {
 
     CONFIG_SVC
 }
+
+PYTHON(){
+    echo -n "Installing Packages :"
+    dnf install python36 gcc python3-devel -y &>>  $LOGFILE
+    stat $? 
+
+    CREATE_USER
+
+    DOWNLOAD_AND_EXTRACT
+
+    echo -n "Generating Artifacts :"
+    cd /home/${APPUSER}/${COMPONENT}/
+    pip3.6 install -r requirements.txt
+    stat $?
+
+    CONFIG_SVC
+
+    START_SVC
+
+}
