@@ -50,13 +50,12 @@ DOWNLOAD_AND_EXTRACT() {
 
 CONFIG_SVC() {
     echo -n "Configuring Permissions :"
-    mv /home/roboshop/${COMPONENT}-main /home/roboshop/${COMPONENT} &>>  $LOGFILE
-    chown -r ${APPUSER}:${APPUSER} /home/roboshop/${COMPONENT}     &>>  $LOGFILE
+    chown -R ${APPUSER}:${APPUSER} ${APPUSER_DIR}      &>>  $LOGFILE
     stat $? 
 
     echo -n "Configuring $COMPONENT Service: "
-    sed -i -e 's/DBHOST/mysql.roboshopshopping/' -e 's/CARTENDPOINT/cart.roboshopshopping/' -e 's/CATALOGUE_ENDPOINT/catalogue.roboshopshopping/' -e 's/MONGO_ENDPOINT/mongodb.roboshopshopping/' -e 's/REDIS_ENDPOINT/redis.roboshopshopping/' -e 's/MONGO_DNSNAME/mongodb.roboshopshopping/' /home/roboshop/${COMPONENT}/systemd.service
-    mv /home/roboshop/${COMPONENT}/systemd.service   /etc/systemd/system/${COMPONENT}.service
+    sed -i -e 's/AMQPHOST/rabbitmq.roboshopshopping/' -e 's/USERHOST/user.roboshopshopping/' -e 's/CARTHOST/cart.roboshopshopping/' -e 's/DBHOST/mysql.roboshopshopping/' -e 's/CARTENDPOINT/cart.roboshopshopping/' -e 's/CATALOGUE_ENDPOINT/catalogue.roboshopshopping/' -e 's/MONGO_ENDPOINT/mongodb.roboshopshopping/' -e 's/REDIS_ENDPOINT/redis.roboshopshopping/' -e 's/MONGO_DNSNAME/mongodb.roboshopshopping/' ${APPUSER_DIR}/systemd.service
+    mv ${APPUSER_DIR}/systemd.service   /etc/systemd/system/${COMPONENT}.service
     stat $? 
 }
 
