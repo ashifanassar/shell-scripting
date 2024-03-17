@@ -1,6 +1,6 @@
 #!/bin/bash
 
-COMPONENT=rabbitmq
+COMPONENT="rabbitmq"
 
 source components/common.sh 
 
