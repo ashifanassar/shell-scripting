@@ -1,5 +1,4 @@
 #!/bin/bash
-
 #This is the script to create an ec2 instance
 
 AMI_ID="ami-072983368f2a6eab5"
