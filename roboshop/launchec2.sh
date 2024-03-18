@@ -29,7 +29,7 @@ fi
 EC2_FUN()
 {
 PRIVATE_IP=$(aws ec2 run-instances --image-id $AMI_ID --instance-type t3.micro --security-group-ids $SGID --tag-specifications "ResourceType=instance,Tags=[{Key=Name,Value=${COMPONENT}-${ENV}}]" | jq .Instances[].PrivateIpAddress |sed -e 's/"//g')
-echo "$COLOR $1-$2 Server Created and here is the IP ADDRESS $PRIVATE_IP $NOCOLOR"
+echo -e "$COLOR $1-$2 Server Created and here is the IP ADDRESS $PRIVATE_IP $NOCOLOR"
 
 echo "Creating r53 json file with component name and ip address:"
 sed -e "s/IPADDRESS/${PRIVATE_IP}/g" -e "s/COMPONENT/${COMPONENT}-${ENV}/g" route53.json > /tmp/dns.json
