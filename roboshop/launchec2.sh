@@ -10,7 +10,7 @@ NOCOLOUR="\e[0m"
 ENV=$2
 
 
-if [ -z $1 ] || [ -z $2]; then
+if [ -z $1 ] || [ -z $2] ; then
     echo -e "\e[31m   COMPONENT NAME IS NEEDED: \e[0m"
     echo -e "\e[36m \t\t Example Usage : \e[0m  bash launch-ec2 ratings"
     exit 1
@@ -39,7 +39,7 @@ aws route53 change-resource-record-sets --hosted-zone-id ${HOSTED_ZONE} --change
 }
 
 #To create the components
-if [$1 = all] ; then
+if [ $1 = all ] ; then
     for x in frontend mongodb catalogue user redis cart mysql shipping rabbitmq payment; do
     COMPONENT=$x
     EC2_FUN
